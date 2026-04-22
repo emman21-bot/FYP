@@ -1,0 +1,1320 @@
+[{
+  "_id": {
+    "$oid": "693afefc60ee871f0ea340e0"
+  },
+  "userId": {
+    "$oid": "69393604288841ec5f40a7db"
+  },
+  "userEmail": "tareenabdullah989@gmail.com",
+  "readingDate": {
+    "$date": "2025-12-11T17:27:24.845Z"
+  },
+  "bloodSugar": {
+    "fasting": 50,
+    "random": 50,
+    "postMeal": 50
+  },
+  "mealContext": "random",
+  "bloodPressure": {
+    "systolic": 100,
+    "diastolic": 100
+  },
+  "bpContext": "resting",
+  "heartRate": 190,
+  "weight": 65,
+  "insulinTaken": 0,
+  "carbsIntake": 0,
+  "medicationsTaken": [],
+  "activityLevel": "sedentary",
+  "unit": {
+    "bloodSugar": "mg/dL",
+    "bloodPressure": "mmHg",
+    "weight": "lbs"
+  },
+  "tags": [],
+  "notes": "Feels sick",
+  "createdAt": {
+    "$date": "2025-12-11T17:27:24.148Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-11T17:27:24.148Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "693aff9c12de4a3b9c2f11a1"
+  },
+  "userId": {
+    "$oid": "69393604288841ec5f40a7db"
+  },
+  "userEmail": "tareenabdullah989@gmail.com",
+  "readingDate": {
+    "$date": "2025-12-10T17:27:24.845Z"
+  },
+  "bloodSugar": {
+    "fasting": 48,
+    "random": 55,
+    "postMeal": 60
+  },
+  "mealContext": "random",
+  "bloodPressure": {
+    "systolic": 92,
+    "diastolic": 60
+  },
+  "bpContext": "resting",
+  "heartRate": 105,
+  "weight": 66,
+  "insulinTaken": 0,
+  "carbsIntake": 5,
+  "medicationsTaken": [],
+  "activityLevel": "sedentary",
+  "unit": {
+    "bloodSugar": "mg/dL",
+    "bloodPressure": "mmHg",
+    "weight": "lbs"
+  },
+  "tags": [],
+  "notes": "Low energy, slight dizziness",
+  "createdAt": {
+    "$date": "2025-12-10T17:27:24.148Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-10T17:27:24.148Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "693affc7b71b4c1fd8b9cd21"
+  },
+  "userId": {
+    "$oid": "69393604288841ec5f40a7db"
+  },
+  "userEmail": "tareenabdullah989@gmail.com",
+  "readingDate": {
+    "$date": "2025-12-09T17:27:24.845Z"
+  },
+  "bloodSugar": {
+    "fasting": 52,
+    "random": 58,
+    "postMeal": 65
+  },
+  "mealContext": "random",
+  "bloodPressure": {
+    "systolic": 95,
+    "diastolic": 63
+  },
+  "bpContext": "resting",
+  "heartRate": 112,
+  "weight": 65,
+  "insulinTaken": 0,
+  "carbsIntake": 10,
+  "medicationsTaken": [],
+  "activityLevel": "sedentary",
+  "unit": {
+    "bloodSugar": "mg/dL",
+    "bloodPressure": "mmHg",
+    "weight": "lbs"
+  },
+  "tags": [],
+  "notes": "Headache and palpitations",
+  "createdAt": {
+    "$date": "2025-12-09T17:27:24.148Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-09T17:27:24.148Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "693affe8d41a92b43bf0fc99"
+  },
+  "userId": {
+    "$oid": "69393604288841ec5f40a7db"
+  },
+  "userEmail": "tareenabdullah989@gmail.com",
+  "readingDate": {
+    "$date": "2025-12-08T17:27:24.845Z"
+  },
+  "bloodSugar": {
+    "fasting": 45,
+    "random": 50,
+    "postMeal": 58
+  },
+  "mealContext": "random",
+  "bloodPressure": {
+    "systolic": 88,
+    "diastolic": 58
+  },
+  "bpContext": "resting",
+  "heartRate": 98,
+  "weight": 66,
+  "insulinTaken": 0,
+  "carbsIntake": 5,
+  "medicationsTaken": [],
+  "activityLevel": "sedentary",
+  "unit": {
+    "bloodSugar": "mg/dL",
+    "bloodPressure": "mmHg",
+    "weight": "lbs"
+  },
+  "tags": [],
+  "notes": "Very low sugar, weakness",
+  "createdAt": {
+    "$date": "2025-12-08T17:27:24.148Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-08T17:27:24.148Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "693b0012f1ca78e91e03aa82"
+  },
+  "userId": {
+    "$oid": "69393604288841ec5f40a7db"
+  },
+  "userEmail": "tareenabdullah989@gmail.com",
+  "readingDate": {
+    "$date": "2025-12-07T17:27:24.845Z"
+  },
+  "bloodSugar": {
+    "fasting": 55,
+    "random": 62,
+    "postMeal": 70
+  },
+  "mealContext": "random",
+  "bloodPressure": {
+    "systolic": 102,
+    "diastolic": 68
+  },
+  "bpContext": "resting",
+  "heartRate": 118,
+  "weight": 66,
+  "insulinTaken": 1,
+  "carbsIntake": 20,
+  "medicationsTaken": [
+    "BP medicine"
+  ],
+  "activityLevel": "sedentary",
+  "unit": {
+    "bloodSugar": "mg/dL",
+    "bloodPressure": "mmHg",
+    "weight": "lbs"
+  },
+  "tags": [],
+  "notes": "Took insulin today",
+  "createdAt": {
+    "$date": "2025-12-07T17:27:24.148Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-07T17:27:24.148Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "693b0038520e91d64be4045f"
+  },
+  "userId": {
+    "$oid": "69393604288841ec5f40a7db"
+  },
+  "userEmail": "tareenabdullah989@gmail.com",
+  "readingDate": {
+    "$date": "2025-12-06T17:27:24.845Z"
+  },
+  "bloodSugar": {
+    "fasting": 60,
+    "random": 70,
+    "postMeal": 78
+  },
+  "mealContext": "random",
+  "bloodPressure": {
+    "systolic": 108,
+    "diastolic": 72
+  },
+  "bpContext": "resting",
+  "heartRate": 122,
+  "weight": 65,
+  "insulinTaken": 1,
+  "carbsIntake": 25,
+  "medicationsTaken": [
+    "BP medicine"
+  ],
+  "activityLevel": "sedentary",
+  "unit": {
+    "bloodSugar": "mg/dL",
+    "bloodPressure": "mmHg",
+    "weight": "lbs"
+  },
+  "tags": [],
+  "notes": "Light headache after meal",
+  "createdAt": {
+    "$date": "2025-12-06T17:27:24.148Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-06T17:27:24.148Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "b7e4831ba505917fe420e14a"
+  },
+  "userId": {
+    "$oid": "69393604288841ec5f40a7db"
+  },
+  "userEmail": "tareenabdullah989@gmail.com",
+  "readingDate": {
+    "$date": "2025-12-05T17:27:24.845Z"
+  },
+  "bloodSugar": {
+    "fasting": 55,
+    "random": 65,
+    "postMeal": 74
+  },
+  "mealContext": "random",
+  "bloodPressure": {
+    "systolic": 99,
+    "diastolic": 67
+  },
+  "bpContext": "resting",
+  "heartRate": 124,
+  "weight": 66,
+  "insulinTaken": 0,
+  "carbsIntake": 8,
+  "medicationsTaken": [],
+  "activityLevel": "sedentary",
+  "unit": {
+    "bloodSugar": "mg/dL",
+    "bloodPressure": "mmHg",
+    "weight": "lbs"
+  },
+  "tags": [],
+  "notes": "Took small snack, sugar improving",
+  "createdAt": {
+    "$date": "2025-12-05T17:27:24.148Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-05T17:27:24.148Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "26ffa36fdf25ed7399b6669c"
+  },
+  "userId": {
+    "$oid": "69393604288841ec5f40a7db"
+  },
+  "userEmail": "tareenabdullah989@gmail.com",
+  "readingDate": {
+    "$date": "2025-12-04T17:27:24.845Z"
+  },
+  "bloodSugar": {
+    "fasting": 55,
+    "random": 64,
+    "postMeal": 67
+  },
+  "mealContext": "random",
+  "bloodPressure": {
+    "systolic": 82,
+    "diastolic": 68
+  },
+  "bpContext": "resting",
+  "heartRate": 90,
+  "weight": 66,
+  "insulinTaken": 1,
+  "carbsIntake": 25,
+  "medicationsTaken": [],
+  "activityLevel": "sedentary",
+  "unit": {
+    "bloodSugar": "mg/dL",
+    "bloodPressure": "mmHg",
+    "weight": "lbs"
+  },
+  "tags": [],
+  "notes": "Feeling better after carb intake",
+  "createdAt": {
+    "$date": "2025-12-04T17:27:24.148Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-04T17:27:24.148Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "b16d9ef99f87388b637a6aea"
+  },
+  "userId": {
+    "$oid": "69393604288841ec5f40a7db"
+  },
+  "userEmail": "tareenabdullah989@gmail.com",
+  "readingDate": {
+    "$date": "2025-12-03T17:27:24.845Z"
+  },
+  "bloodSugar": {
+    "fasting": 45,
+    "random": 53,
+    "postMeal": 63
+  },
+  "mealContext": "random",
+  "bloodPressure": {
+    "systolic": 88,
+    "diastolic": 59
+  },
+  "bpContext": "resting",
+  "heartRate": 88,
+  "weight": 66,
+  "insulinTaken": 0,
+  "carbsIntake": 18,
+  "medicationsTaken": [],
+  "activityLevel": "sedentary",
+  "unit": {
+    "bloodSugar": "mg/dL",
+    "bloodPressure": "mmHg",
+    "weight": "lbs"
+  },
+  "tags": [],
+  "notes": "Low BP and low sugar, felt faint",
+  "createdAt": {
+    "$date": "2025-12-03T17:27:24.148Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-03T17:27:24.148Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "879a8b49a4b01b48826e1ed3"
+  },
+  "userId": {
+    "$oid": "69393604288841ec5f40a7db"
+  },
+  "userEmail": "tareenabdullah989@gmail.com",
+  "readingDate": {
+    "$date": "2025-12-02T17:27:24.845Z"
+  },
+  "bloodSugar": {
+    "fasting": 55,
+    "random": 70,
+    "postMeal": 80
+  },
+  "mealContext": "random",
+  "bloodPressure": {
+    "systolic": 96,
+    "diastolic": 63
+  },
+  "bpContext": "resting",
+  "heartRate": 94,
+  "weight": 66,
+  "insulinTaken": 1,
+  "carbsIntake": 10,
+  "medicationsTaken": [
+    "BP medicine"
+  ],
+  "activityLevel": "sedentary",
+  "unit": {
+    "bloodSugar": "mg/dL",
+    "bloodPressure": "mmHg",
+    "weight": "lbs"
+  },
+  "tags": [],
+  "notes": "Very low sugar, weakness",
+  "createdAt": {
+    "$date": "2025-12-02T17:27:24.148Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-02T17:27:24.148Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "30237433ebfcd1f4de3d3327"
+  },
+  "userId": {
+    "$oid": "69393604288841ec5f40a7db"
+  },
+  "userEmail": "tareenabdullah989@gmail.com",
+  "readingDate": {
+    "$date": "2025-12-01T17:27:24.845Z"
+  },
+  "bloodSugar": {
+    "fasting": 55,
+    "random": 68,
+    "postMeal": 83
+  },
+  "mealContext": "random",
+  "bloodPressure": {
+    "systolic": 95,
+    "diastolic": 59
+  },
+  "bpContext": "resting",
+  "heartRate": 107,
+  "weight": 66,
+  "insulinTaken": 1,
+  "carbsIntake": 20,
+  "medicationsTaken": [
+    "BP medicine"
+  ],
+  "activityLevel": "sedentary",
+  "unit": {
+    "bloodSugar": "mg/dL",
+    "bloodPressure": "mmHg",
+    "weight": "lbs"
+  },
+  "tags": [],
+  "notes": "Headache and low sugar after meal",
+  "createdAt": {
+    "$date": "2025-12-01T17:27:24.148Z"
+  },
+  "updatedAt": {
+    "$date": "2025-12-01T17:27:24.148Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "8c781852642d97235c33bc2e"
+  },
+  "userId": {
+    "$oid": "69393604288841ec5f40a7db"
+  },
+  "userEmail": "tareenabdullah989@gmail.com",
+  "readingDate": {
+    "$date": "2025-11-30T17:27:24.845Z"
+  },
+  "bloodSugar": {
+    "fasting": 45,
+    "random": 58,
+    "postMeal": 67
+  },
+  "mealContext": "random",
+  "bloodPressure": {
+    "systolic": 96,
+    "diastolic": 68
+  },
+  "bpContext": "resting",
+  "heartRate": 103,
+  "weight": 66,
+  "insulinTaken": 0,
+  "carbsIntake": 12,
+  "medicationsTaken": [],
+  "activityLevel": "sedentary",
+  "unit": {
+    "bloodSugar": "mg/dL",
+    "bloodPressure": "mmHg",
+    "weight": "lbs"
+  },
+  "tags": [],
+  "notes": "Lightheaded, dizziness after standing",
+  "createdAt": {
+    "$date": "2025-11-30T17:27:24.148Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-30T17:27:24.148Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "8043924afa8684c9dee7165c"
+  },
+  "userId": {
+    "$oid": "69393604288841ec5f40a7db"
+  },
+  "userEmail": "tareenabdullah989@gmail.com",
+  "readingDate": {
+    "$date": "2025-11-29T17:27:24.845Z"
+  },
+  "bloodSugar": {
+    "fasting": 55,
+    "random": 64,
+    "postMeal": 71
+  },
+  "mealContext": "random",
+  "bloodPressure": {
+    "systolic": 101,
+    "diastolic": 74
+  },
+  "bpContext": "resting",
+  "heartRate": 125,
+  "weight": 66,
+  "insulinTaken": 1,
+  "carbsIntake": 25,
+  "medicationsTaken": [
+    "BP medicine"
+  ],
+  "activityLevel": "sedentary",
+  "unit": {
+    "bloodSugar": "mg/dL",
+    "bloodPressure": "mmHg",
+    "weight": "lbs"
+  },
+  "tags": [],
+  "notes": "Weakness and sweating, consumed carbs",
+  "createdAt": {
+    "$date": "2025-11-29T17:27:24.148Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-29T17:27:24.148Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "fa98752ecacc8a5e0aa71d1d"
+  },
+  "userId": {
+    "$oid": "69393604288841ec5f40a7db"
+  },
+  "userEmail": "tareenabdullah989@gmail.com",
+  "readingDate": {
+    "$date": "2025-11-28T17:27:24.845Z"
+  },
+  "bloodSugar": {
+    "fasting": 60,
+    "random": 76,
+    "postMeal": 80
+  },
+  "mealContext": "random",
+  "bloodPressure": {
+    "systolic": 93,
+    "diastolic": 56
+  },
+  "bpContext": "resting",
+  "heartRate": 130,
+  "weight": 66,
+  "insulinTaken": 1,
+  "carbsIntake": 5,
+  "medicationsTaken": [],
+  "activityLevel": "sedentary",
+  "unit": {
+    "bloodSugar": "mg/dL",
+    "bloodPressure": "mmHg",
+    "weight": "lbs"
+  },
+  "tags": [],
+  "notes": "Took insulin today — monitor closely",
+  "createdAt": {
+    "$date": "2025-11-28T17:27:24.148Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-28T17:27:24.148Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "cc7170209e6d21b80834c51c"
+  },
+  "userId": {
+    "$oid": "69393604288841ec5f40a7db"
+  },
+  "userEmail": "tareenabdullah989@gmail.com",
+  "readingDate": {
+    "$date": "2025-11-27T17:27:24.845Z"
+  },
+  "bloodSugar": {
+    "fasting": 60,
+    "random": 70,
+    "postMeal": 81
+  },
+  "mealContext": "random",
+  "bloodPressure": {
+    "systolic": 106,
+    "diastolic": 62
+  },
+  "bpContext": "resting",
+  "heartRate": 95,
+  "weight": 66,
+  "insulinTaken": 0,
+  "carbsIntake": 18,
+  "medicationsTaken": [
+    "BP medicine"
+  ],
+  "activityLevel": "sedentary",
+  "unit": {
+    "bloodSugar": "mg/dL",
+    "bloodPressure": "mmHg",
+    "weight": "lbs"
+  },
+  "tags": [],
+  "notes": "Took small snack, sugar improving",
+  "createdAt": {
+    "$date": "2025-11-27T17:27:24.148Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-27T17:27:24.148Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "d695a6c9479ed0be3ef0e21f"
+  },
+  "userId": {
+    "$oid": "69393604288841ec5f40a7db"
+  },
+  "userEmail": "tareenabdullah989@gmail.com",
+  "readingDate": {
+    "$date": "2025-11-26T17:27:24.845Z"
+  },
+  "bloodSugar": {
+    "fasting": 45,
+    "random": 51,
+    "postMeal": 66
+  },
+  "mealContext": "random",
+  "bloodPressure": {
+    "systolic": 97,
+    "diastolic": 65
+  },
+  "bpContext": "resting",
+  "heartRate": 108,
+  "weight": 66,
+  "insulinTaken": 0,
+  "carbsIntake": 12,
+  "medicationsTaken": [
+    "BP medicine"
+  ],
+  "activityLevel": "sedentary",
+  "unit": {
+    "bloodSugar": "mg/dL",
+    "bloodPressure": "mmHg",
+    "weight": "lbs"
+  },
+  "tags": [],
+  "notes": "Headache and low sugar after meal",
+  "createdAt": {
+    "$date": "2025-11-26T17:27:24.148Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-26T17:27:24.148Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "f60679e78a6075340d44917b"
+  },
+  "userId": {
+    "$oid": "69393604288841ec5f40a7db"
+  },
+  "userEmail": "tareenabdullah989@gmail.com",
+  "readingDate": {
+    "$date": "2025-11-25T17:27:24.845Z"
+  },
+  "bloodSugar": {
+    "fasting": 45,
+    "random": 65,
+    "postMeal": 71
+  },
+  "mealContext": "random",
+  "bloodPressure": {
+    "systolic": 84,
+    "diastolic": 70
+  },
+  "bpContext": "resting",
+  "heartRate": 114,
+  "weight": 66,
+  "insulinTaken": 1,
+  "carbsIntake": 10,
+  "medicationsTaken": [],
+  "activityLevel": "sedentary",
+  "unit": {
+    "bloodSugar": "mg/dL",
+    "bloodPressure": "mmHg",
+    "weight": "lbs"
+  },
+  "tags": [],
+  "notes": "Headache and low sugar after meal",
+  "createdAt": {
+    "$date": "2025-11-25T17:27:24.148Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-25T17:27:24.148Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "92e3a6c95f3e181669e084b2"
+  },
+  "userId": {
+    "$oid": "69393604288841ec5f40a7db"
+  },
+  "userEmail": "tareenabdullah989@gmail.com",
+  "readingDate": {
+    "$date": "2025-11-24T17:27:24.845Z"
+  },
+  "bloodSugar": {
+    "fasting": 45,
+    "random": 59,
+    "postMeal": 71
+  },
+  "mealContext": "random",
+  "bloodPressure": {
+    "systolic": 105,
+    "diastolic": 66
+  },
+  "bpContext": "resting",
+  "heartRate": 126,
+  "weight": 66,
+  "insulinTaken": 0,
+  "carbsIntake": 5,
+  "medicationsTaken": [],
+  "activityLevel": "sedentary",
+  "unit": {
+    "bloodSugar": "mg/dL",
+    "bloodPressure": "mmHg",
+    "weight": "lbs"
+  },
+  "tags": [],
+  "notes": "Took small snack, sugar improving",
+  "createdAt": {
+    "$date": "2025-11-24T17:27:24.148Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-24T17:27:24.148Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "8adbe0ff70b632cba0facbcd"
+  },
+  "userId": {
+    "$oid": "69393604288841ec5f40a7db"
+  },
+  "userEmail": "tareenabdullah989@gmail.com",
+  "readingDate": {
+    "$date": "2025-11-23T17:27:24.845Z"
+  },
+  "bloodSugar": {
+    "fasting": 45,
+    "random": 62,
+    "postMeal": 74
+  },
+  "mealContext": "random",
+  "bloodPressure": {
+    "systolic": 88,
+    "diastolic": 63
+  },
+  "bpContext": "resting",
+  "heartRate": 112,
+  "weight": 66,
+  "insulinTaken": 1,
+  "carbsIntake": 25,
+  "medicationsTaken": [
+    "BP medicine"
+  ],
+  "activityLevel": "sedentary",
+  "unit": {
+    "bloodSugar": "mg/dL",
+    "bloodPressure": "mmHg",
+    "weight": "lbs"
+  },
+  "tags": [],
+  "notes": "Feeling better after carb intake",
+  "createdAt": {
+    "$date": "2025-11-23T17:27:24.148Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-23T17:27:24.148Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "f7e8e7fc1a92865c2fd3f57b"
+  },
+  "userId": {
+    "$oid": "69393604288841ec5f40a7db"
+  },
+  "userEmail": "tareenabdullah989@gmail.com",
+  "readingDate": {
+    "$date": "2025-11-22T17:27:24.845Z"
+  },
+  "bloodSugar": {
+    "fasting": 55,
+    "random": 71,
+    "postMeal": 85
+  },
+  "mealContext": "random",
+  "bloodPressure": {
+    "systolic": 86,
+    "diastolic": 56
+  },
+  "bpContext": "resting",
+  "heartRate": 121,
+  "weight": 66,
+  "insulinTaken": 1,
+  "carbsIntake": 15,
+  "medicationsTaken": [],
+  "activityLevel": "sedentary",
+  "unit": {
+    "bloodSugar": "mg/dL",
+    "bloodPressure": "mmHg",
+    "weight": "lbs"
+  },
+  "tags": [],
+  "notes": "Took small snack, sugar improving",
+  "createdAt": {
+    "$date": "2025-11-22T17:27:24.148Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-22T17:27:24.148Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "1c1bcb7177317f9e037cb71c"
+  },
+  "userId": {
+    "$oid": "69393604288841ec5f40a7db"
+  },
+  "userEmail": "tareenabdullah989@gmail.com",
+  "readingDate": {
+    "$date": "2025-11-21T17:27:24.845Z"
+  },
+  "bloodSugar": {
+    "fasting": 50,
+    "random": 68,
+    "postMeal": 81
+  },
+  "mealContext": "random",
+  "bloodPressure": {
+    "systolic": 89,
+    "diastolic": 65
+  },
+  "bpContext": "resting",
+  "heartRate": 124,
+  "weight": 66,
+  "insulinTaken": 1,
+  "carbsIntake": 10,
+  "medicationsTaken": [],
+  "activityLevel": "sedentary",
+  "unit": {
+    "bloodSugar": "mg/dL",
+    "bloodPressure": "mmHg",
+    "weight": "lbs"
+  },
+  "tags": [],
+  "notes": "Headache and low sugar after meal",
+  "createdAt": {
+    "$date": "2025-11-21T17:27:24.148Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-21T17:27:24.148Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6f39a6a4fde269469d8fffff"
+  },
+  "userId": {
+    "$oid": "69393604288841ec5f40a7db"
+  },
+  "userEmail": "tareenabdullah989@gmail.com",
+  "readingDate": {
+    "$date": "2025-11-20T17:27:24.845Z"
+  },
+  "bloodSugar": {
+    "fasting": 45,
+    "random": 59,
+    "postMeal": 64
+  },
+  "mealContext": "random",
+  "bloodPressure": {
+    "systolic": 101,
+    "diastolic": 74
+  },
+  "bpContext": "resting",
+  "heartRate": 123,
+  "weight": 66,
+  "insulinTaken": 0,
+  "carbsIntake": 18,
+  "medicationsTaken": [
+    "BP medicine"
+  ],
+  "activityLevel": "sedentary",
+  "unit": {
+    "bloodSugar": "mg/dL",
+    "bloodPressure": "mmHg",
+    "weight": "lbs"
+  },
+  "tags": [],
+  "notes": "Feeling better after carb intake",
+  "createdAt": {
+    "$date": "2025-11-20T17:27:24.148Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-20T17:27:24.148Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "f5917a120c6504db4812312c"
+  },
+  "userId": {
+    "$oid": "69393604288841ec5f40a7db"
+  },
+  "userEmail": "tareenabdullah989@gmail.com",
+  "readingDate": {
+    "$date": "2025-11-19T17:27:24.845Z"
+  },
+  "bloodSugar": {
+    "fasting": 50,
+    "random": 66,
+    "postMeal": 80
+  },
+  "mealContext": "random",
+  "bloodPressure": {
+    "systolic": 97,
+    "diastolic": 70
+  },
+  "bpContext": "resting",
+  "heartRate": 106,
+  "weight": 66,
+  "insulinTaken": 1,
+  "carbsIntake": 20,
+  "medicationsTaken": [
+    "BP medicine"
+  ],
+  "activityLevel": "sedentary",
+  "unit": {
+    "bloodSugar": "mg/dL",
+    "bloodPressure": "mmHg",
+    "weight": "lbs"
+  },
+  "tags": [],
+  "notes": "Lightheaded, dizziness after standing",
+  "createdAt": {
+    "$date": "2025-11-19T17:27:24.148Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-19T17:27:24.148Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "ac4a8c2466709aa010190cb4"
+  },
+  "userId": {
+    "$oid": "69393604288841ec5f40a7db"
+  },
+  "userEmail": "tareenabdullah989@gmail.com",
+  "readingDate": {
+    "$date": "2025-11-18T17:27:24.845Z"
+  },
+  "bloodSugar": {
+    "fasting": 50,
+    "random": 62,
+    "postMeal": 65
+  },
+  "mealContext": "random",
+  "bloodPressure": {
+    "systolic": 101,
+    "diastolic": 70
+  },
+  "bpContext": "resting",
+  "heartRate": 110,
+  "weight": 66,
+  "insulinTaken": 1,
+  "carbsIntake": 25,
+  "medicationsTaken": [],
+  "activityLevel": "sedentary",
+  "unit": {
+    "bloodSugar": "mg/dL",
+    "bloodPressure": "mmHg",
+    "weight": "lbs"
+  },
+  "tags": [],
+  "notes": "Headache and low sugar after meal",
+  "createdAt": {
+    "$date": "2025-11-18T17:27:24.148Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-18T17:27:24.148Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "40a9da6b1335b318be86211b"
+  },
+  "userId": {
+    "$oid": "69393604288841ec5f40a7db"
+  },
+  "userEmail": "tareenabdullah989@gmail.com",
+  "readingDate": {
+    "$date": "2025-11-17T17:27:24.845Z"
+  },
+  "bloodSugar": {
+    "fasting": 50,
+    "random": 60,
+    "postMeal": 68
+  },
+  "mealContext": "random",
+  "bloodPressure": {
+    "systolic": 85,
+    "diastolic": 74
+  },
+  "bpContext": "resting",
+  "heartRate": 111,
+  "weight": 66,
+  "insulinTaken": 0,
+  "carbsIntake": 3,
+  "medicationsTaken": [
+    "BP medicine"
+  ],
+  "activityLevel": "sedentary",
+  "unit": {
+    "bloodSugar": "mg/dL",
+    "bloodPressure": "mmHg",
+    "weight": "lbs"
+  },
+  "tags": [],
+  "notes": "Took small snack, sugar improving",
+  "createdAt": {
+    "$date": "2025-11-17T17:27:24.148Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-17T17:27:24.148Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6bb4d72ef0833d3975892338"
+  },
+  "userId": {
+    "$oid": "69393604288841ec5f40a7db"
+  },
+  "userEmail": "tareenabdullah989@gmail.com",
+  "readingDate": {
+    "$date": "2025-11-16T17:27:24.845Z"
+  },
+  "bloodSugar": {
+    "fasting": 55,
+    "random": 71,
+    "postMeal": 86
+  },
+  "mealContext": "random",
+  "bloodPressure": {
+    "systolic": 106,
+    "diastolic": 60
+  },
+  "bpContext": "resting",
+  "heartRate": 104,
+  "weight": 66,
+  "insulinTaken": 1,
+  "carbsIntake": 15,
+  "medicationsTaken": [
+    "BP medicine"
+  ],
+  "activityLevel": "sedentary",
+  "unit": {
+    "bloodSugar": "mg/dL",
+    "bloodPressure": "mmHg",
+    "weight": "lbs"
+  },
+  "tags": [],
+  "notes": "Lightheaded, dizziness after standing",
+  "createdAt": {
+    "$date": "2025-11-16T17:27:24.148Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-16T17:27:24.148Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "5ad0bd37d6d9a32c9cd60781"
+  },
+  "userId": {
+    "$oid": "69393604288841ec5f40a7db"
+  },
+  "userEmail": "tareenabdullah989@gmail.com",
+  "readingDate": {
+    "$date": "2025-11-15T17:27:24.845Z"
+  },
+  "bloodSugar": {
+    "fasting": 55,
+    "random": 71,
+    "postMeal": 86
+  },
+  "mealContext": "random",
+  "bloodPressure": {
+    "systolic": 89,
+    "diastolic": 59
+  },
+  "bpContext": "resting",
+  "heartRate": 101,
+  "weight": 66,
+  "insulinTaken": 1,
+  "carbsIntake": 10,
+  "medicationsTaken": [
+    "BP medicine"
+  ],
+  "activityLevel": "sedentary",
+  "unit": {
+    "bloodSugar": "mg/dL",
+    "bloodPressure": "mmHg",
+    "weight": "lbs"
+  },
+  "tags": [],
+  "notes": "Lightheaded, dizziness after standing",
+  "createdAt": {
+    "$date": "2025-11-15T17:27:24.148Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-15T17:27:24.148Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "fd6f1087a1e7834a78b93e69"
+  },
+  "userId": {
+    "$oid": "69393604288841ec5f40a7db"
+  },
+  "userEmail": "tareenabdullah989@gmail.com",
+  "readingDate": {
+    "$date": "2025-11-14T17:27:24.845Z"
+  },
+  "bloodSugar": {
+    "fasting": 60,
+    "random": 80,
+    "postMeal": 95
+  },
+  "mealContext": "random",
+  "bloodPressure": {
+    "systolic": 100,
+    "diastolic": 55
+  },
+  "bpContext": "resting",
+  "heartRate": 103,
+  "weight": 66,
+  "insulinTaken": 1,
+  "carbsIntake": 20,
+  "medicationsTaken": [
+    "BP medicine"
+  ],
+  "activityLevel": "sedentary",
+  "unit": {
+    "bloodSugar": "mg/dL",
+    "bloodPressure": "mmHg",
+    "weight": "lbs"
+  },
+  "tags": [],
+  "notes": "Took insulin today — monitor closely",
+  "createdAt": {
+    "$date": "2025-11-14T17:27:24.148Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-14T17:27:24.148Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "effa722380a402dc396f4d59"
+  },
+  "userId": {
+    "$oid": "69393604288841ec5f40a7db"
+  },
+  "userEmail": "tareenabdullah989@gmail.com",
+  "readingDate": {
+    "$date": "2025-11-13T17:27:24.845Z"
+  },
+  "bloodSugar": {
+    "fasting": 55,
+    "random": 60,
+    "postMeal": 69
+  },
+  "mealContext": "random",
+  "bloodPressure": {
+    "systolic": 84,
+    "diastolic": 58
+  },
+  "bpContext": "resting",
+  "heartRate": 112,
+  "weight": 66,
+  "insulinTaken": 0,
+  "carbsIntake": 8,
+  "medicationsTaken": [],
+  "activityLevel": "sedentary",
+  "unit": {
+    "bloodSugar": "mg/dL",
+    "bloodPressure": "mmHg",
+    "weight": "lbs"
+  },
+  "tags": [],
+  "notes": "Feeling better after carb intake",
+  "createdAt": {
+    "$date": "2025-11-13T17:27:24.148Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-13T17:27:24.148Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "cd2c2339e49521c952769f32"
+  },
+  "userId": {
+    "$oid": "69393604288841ec5f40a7db"
+  },
+  "userEmail": "tareenabdullah989@gmail.com",
+  "readingDate": {
+    "$date": "2025-11-12T17:27:24.845Z"
+  },
+  "bloodSugar": {
+    "fasting": 45,
+    "random": 50,
+    "postMeal": 64
+  },
+  "mealContext": "random",
+  "bloodPressure": {
+    "systolic": 90,
+    "diastolic": 55
+  },
+  "bpContext": "resting",
+  "heartRate": 106,
+  "weight": 66,
+  "insulinTaken": 0,
+  "carbsIntake": 8,
+  "medicationsTaken": [
+    "BP medicine"
+  ],
+  "activityLevel": "sedentary",
+  "unit": {
+    "bloodSugar": "mg/dL",
+    "bloodPressure": "mmHg",
+    "weight": "lbs"
+  },
+  "tags": [],
+  "notes": "Lightheaded, dizziness after standing",
+  "createdAt": {
+    "$date": "2025-11-12T17:27:24.148Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-12T17:27:24.148Z"
+  },
+  "__v": 0
+}]

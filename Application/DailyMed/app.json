@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "DailyMed",
+    "slug": "DailyMed",
+    "version": "1.0.0",
+    "plugins": [
+      "expo-font"
+    ]
+  }
+}
