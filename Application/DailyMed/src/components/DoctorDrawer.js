@@ -6,10 +6,10 @@ import {
   TouchableOpacity,
   Modal,
   Dimensions,
-  SafeAreaView,
   StatusBar,
   Image,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '../../constants/theme';
 import { authAPI } from '../services/api';

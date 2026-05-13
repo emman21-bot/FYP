@@ -5,12 +5,12 @@ import {
   Text,
   TouchableOpacity,
   StatusBar,
-  SafeAreaView,
   FlatList,
   RefreshControl,
   ActivityIndicator,
   Animated
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import { Colors } from '../../../constants/theme';

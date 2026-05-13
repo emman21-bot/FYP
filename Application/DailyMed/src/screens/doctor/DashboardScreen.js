@@ -5,11 +5,11 @@ import {
   Text,
   TouchableOpacity,
   StatusBar,
-  SafeAreaView,
   ScrollView,
   RefreshControl,
   ActivityIndicator,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Colors } from '../../../constants/theme';
 import DoctorDrawer from '../../components/DoctorDrawer';
 import { Feather, MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';

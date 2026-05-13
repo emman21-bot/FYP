@@ -6,7 +6,6 @@ import {
   Text,
   TouchableOpacity,
   StatusBar,
-  SafeAreaView,
   ScrollView,
   FlatList,
   ActivityIndicator,
@@ -16,6 +15,7 @@ import {
   Linking,
   RefreshControl,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';

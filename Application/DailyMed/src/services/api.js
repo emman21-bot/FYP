@@ -5,7 +5,7 @@ import { getStoredToken, saveAuthData, clearAuthData } from '../utils/authStorag
 // For local development on physical device, use your computer's IP address
 // For Android emulator, use 10.0.2.2
 // For iOS simulator, use localhost
-const API_BASE_URL = 'http://192.168.1.71:5000/api'; // Change this based on your setup
+const API_BASE_URL = 'http://192.168.10.8:5000/api'; // Change this based on your setup
 
 // Create axios instance
 const api = axios.create({

@@ -5,9 +5,9 @@ import {
   Text,
   TouchableOpacity,
   StatusBar,
-  SafeAreaView,
   ScrollView,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Colors } from '../../../constants/theme';
 import CaregiverDrawer from '../../components/CaregiverDrawer';
 import { Feather, MaterialCommunityIcons } from '@expo/vector-icons';

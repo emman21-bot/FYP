@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useFonts, Montserrat_400Regular, Montserrat_500Medium, Montserrat_600SemiBold, Montserrat_700Bold } from '@expo-google-fonts/montserrat';
 import { View, ActivityIndicator } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { SplashScreen1, SplashScreen2, SplashScreen3 } from './src/screens/splashscreens';
 import { LoginScreen, RegisterScreen, ForgotPasswordScreen, OTPVerificationScreen, ResetPasswordScreen } from './src/screens/auth';
 import { 
@@ -87,7 +88,8 @@ export default function App() {
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <NavigationContainer>
+      <SafeAreaProvider>
+        <NavigationContainer>
         <Stack.Navigator
           initialRouteName={initialRoute}
           screenOptions={{
@@ -140,6 +142,7 @@ export default function App() {
         />
       </Stack.Navigator>
     </NavigationContainer>
+      </SafeAreaProvider>
     </GestureHandlerRootView>
   );
 }

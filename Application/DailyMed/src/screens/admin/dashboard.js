@@ -5,9 +5,9 @@ import {
   Text,
   TouchableOpacity,
   StatusBar,
-  SafeAreaView,
   ScrollView,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import CustomAlert from '../../components/CustomAlert';
 import { FontAwesome, MaterialIcons, Feather, Ionicons } from '@expo/vector-icons';
 

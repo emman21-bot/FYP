@@ -5,12 +5,12 @@ import {
   Text,
   TouchableOpacity,
   StatusBar,
-  SafeAreaView,
   ScrollView,
   RefreshControl,
   ActivityIndicator,
   Dimensions,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Colors } from '../../../constants/theme';
 import CustomDrawer from '../../components/CustomDrawer';
 import { Feather, MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
