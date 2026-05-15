@@ -17,36 +17,35 @@ const {
   getAuditLogs,
   broadcastNotification
 } = require('../controllers/adminController');
-const { protect } = require('../middlewares/auth');
+const { protect, authorizeAdmin } = require('../middlewares/auth');
 
-// Note: In production, add admin role check middleware
-// For now, just using protect middleware
+// All admin routes require authentication AND admin role
 
 // ===== USER MANAGEMENT ROUTES =====
-router.get('/users', protect, getAllUsers);
-router.get('/users/:id', protect, getUserById);
-router.post('/users', protect, createUser);
-router.put('/users/:id/status', protect, updateUserStatus);
-router.delete('/users/:id', protect, deleteUser);
+router.get('/users', protect, authorizeAdmin, getAllUsers);
+router.get('/users/:id', protect, authorizeAdmin, getUserById);
+router.post('/users', protect, authorizeAdmin, createUser);
+router.put('/users/:id/status', protect, authorizeAdmin, updateUserStatus);
+router.delete('/users/:id', protect, authorizeAdmin, deleteUser);
 
 // ===== BULK OPERATIONS =====
-router.put('/users/bulk-status', protect, bulkUpdateUserStatus);
-router.delete('/users/bulk-delete', protect, bulkDeleteUsers);
+router.put('/users/bulk-status', protect, authorizeAdmin, bulkUpdateUserStatus);
+router.delete('/users/bulk-delete', protect, authorizeAdmin, bulkDeleteUsers);
 
 // ===== USER DATA VIEWING =====
-router.get('/users/:id/health-data', protect, getUserHealthData);
-router.get('/users/:id/appointments', protect, getUserAppointments);
-router.get('/users/:id/medications', protect, getUserMedications);
-router.get('/users/:id/predictions', protect, getUserPredictions);
+router.get('/users/:id/health-data', protect, authorizeAdmin, getUserHealthData);
+router.get('/users/:id/appointments', protect, authorizeAdmin, getUserAppointments);
+router.get('/users/:id/medications', protect, authorizeAdmin, getUserMedications);
+router.get('/users/:id/predictions', protect, authorizeAdmin, getUserPredictions);
 
 // ===== STATISTICS & ANALYTICS =====
-router.get('/stats', protect, getUserStats);
-router.get('/system-stats', protect, getSystemStats);
+router.get('/stats', protect, authorizeAdmin, getUserStats);
+router.get('/system-stats', protect, authorizeAdmin, getSystemStats);
 
 // ===== AUDIT & MONITORING =====
-router.get('/audit-logs', protect, getAuditLogs);
+router.get('/audit-logs', protect, authorizeAdmin, getAuditLogs);
 
 // ===== BROADCAST & COMMUNICATION =====
-router.post('/broadcast-notification', protect, broadcastNotification);
+router.post('/broadcast-notification', protect, authorizeAdmin, broadcastNotification);
 
 module.exports = router;

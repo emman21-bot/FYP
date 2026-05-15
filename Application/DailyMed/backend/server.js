@@ -20,6 +20,8 @@ const healthDataAttachmentRoutes = require('./routes/healthDataAttachment');
 const treatmentPlanRoutes = require('./routes/treatmentPlan');
 const doctorRoutes = require('./routes/doctor');
 const analyticsRoutes = require('./routes/analytics');
+const supportRoutes = require('./routes/support');
+const adminSettingsRoutes = require('./routes/adminSettings');
 const errorHandler = require('./middlewares/errorHandler');
 const { apiLimiter } = require('./middlewares/rateLimiter');
 const sanitizeInput = require('./middlewares/sanitize');
@@ -89,6 +91,8 @@ app.use('/api/health-data', healthDataAttachmentRoutes); // Attachment routes un
 app.use('/api/treatment-plans', treatmentPlanRoutes);
 app.use('/api/doctors', doctorRoutes);
 app.use('/api/analytics', analyticsRoutes);
+app.use('/api/support', supportRoutes);
+app.use('/api/admin/settings', adminSettingsRoutes);
 app.use('/api/treatment-plans', treatmentPlanRoutes);
 
 // 404 handler

@@ -90,4 +90,17 @@ const checkVerified = async (req, res, next) => {
   }
 };
 
-module.exports = { protect, authorize, checkVerified };
+// Check if user is admin
+const authorizeAdmin = (req, res, next) => {
+  // Allow special admin token
+  if (req.user.role === 'admin') {
+    return next();
+  }
+  
+  return res.status(403).json({
+    success: false,
+    message: 'Access denied. Admin privileges required.'
+  });
+};
+
+module.exports = { protect, authorize, checkVerified, authorizeAdmin };
