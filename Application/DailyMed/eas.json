@@ -1,0 +1,45 @@
+{
+  "cli": {
+    "version": ">= 18.13.0",
+    "appVersionSource": "remote",
+    "promptToConfigurePushNotifications": false
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal"
+    },
+    "preview": {
+      "distribution": "internal",
+      "channel": "preview",
+      "android": {
+        "buildType": "apk"
+      }
+    },
+    "production": {
+      "autoIncrement": true,
+      "channel": "production",
+      "android": {
+        "buildType": "aab",
+        "release": true
+      },
+      "ios": {
+        "buildType": "ipa"
+      }
+    }
+  },
+  "submit": {
+    "production": {
+      "android": {
+        "track": "internal",
+        "serviceAccount": "~/.eas/android-credentials.json"
+      },
+      "ios": {
+        "appleId": "your-email@example.com",
+        "appleIdPassword": "@keychain:APPLE_APP_PASSWORD",
+        "teamId": "YOUR_TEAM_ID",
+        "bundleIdentifier": "com.emman21.dailymed"
+      }
+    }
+  }
+}

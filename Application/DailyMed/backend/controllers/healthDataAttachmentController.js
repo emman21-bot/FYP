@@ -5,9 +5,10 @@ const { v4: uuidv4 } = require('uuid');
 const path = require('path');
 const fs = require('fs').promises;
 const crypto = require('crypto');
+const storageHelper = require('../utils/storage');
 
 // Configure multer for file uploads
-const storage = multer.diskStorage({
+const multerStorage = multer.diskStorage({
   destination: async (req, file, cb) => {
     const uploadDir = path.join(__dirname, '../../uploads/health-attachments');
     try {
@@ -38,7 +39,7 @@ const fileFilter = (req, file, cb) => {
 
 // Multer upload instance
 const upload = multer({
-  storage,
+  storage: multerStorage,
   limits: {
     fileSize: 10 * 1024 * 1024 // 10MB limit
   },
@@ -75,17 +76,35 @@ exports.uploadAttachment = [
       // Calculate checksum
       const checksum = await calculateChecksum(req.file.path);
 
-      // Create attachment record
+      // Upload to configured storage (S3/MinIO/local)
+      const destKey = `health-attachments/${Date.now()}-${req.file.filename}`;
+      let uploadResult;
+      try {
+        uploadResult = await storageHelper.uploadFile(req.file.path, destKey, req.file.mimetype);
+      } catch (uploadErr) {
+        // Clean up local file
+        await fs.unlink(req.file.path).catch(() => {});
+        throw uploadErr;
+      }
+
+      // Delete local temp file if uploaded remotely
+      if (uploadResult.provider && uploadResult.provider !== 'local') {
+        await fs.unlink(req.file.path).catch(() => {});
+      }
+
+      // Create attachment record using model fields
       const attachment = await HealthDataAttachment.create({
         healthDataId,
         userId,
         userEmail,
         fileName: req.file.originalname,
-        fileType: req.file.mimetype,
+        fileType: 'other',
+        mimeType: req.file.mimetype,
         fileSize: req.file.size,
-        storageUrl: req.file.path, // In production, use S3 URL
+        fileUrl: uploadResult.url,
+        fileKey: uploadResult.key,
         checksum,
-        uploadedBy: userId
+        description: ''
       });
 
       res.status(201).json({
@@ -131,7 +150,7 @@ exports.getAttachments = async (req, res) => {
     }
 
     const attachments = await HealthDataAttachment.find({ healthDataId })
-      .select('-storageUrl -checksum') // Don't expose internal paths
+      .select('-fileUrl -fileKey -checksum') // Don't expose internal paths
       .sort({ createdAt: -1 });
 
     res.json({ attachments });
@@ -162,15 +181,27 @@ exports.downloadAttachment = async (req, res) => {
       return res.status(403).json({ message: 'Access denied' });
     }
 
-    // Check if file exists
-    try {
-      await fs.access(attachment.storageUrl);
-    } catch {
-      return res.status(404).json({ message: 'File not found on server' });
+    // If stored locally, download from file system
+    const localUploadsPath = path.join(__dirname, '../../uploads');
+    if (attachment.fileUrl && attachment.fileUrl.startsWith(localUploadsPath)) {
+      try {
+        await fs.access(attachment.fileUrl);
+        return res.download(attachment.fileUrl, attachment.fileName);
+      } catch {
+        return res.status(404).json({ message: 'File not found on server' });
+      }
     }
 
-    // Send file
-    res.download(attachment.storageUrl, attachment.fileName);
+    // Otherwise stream from storage helper (S3/MinIO)
+    try {
+      const stream = await storageHelper.getDownloadStream(attachment.fileKey || attachment.fileUrl);
+      res.setHeader('Content-Disposition', `attachment; filename="${attachment.fileName}"`);
+      res.setHeader('Content-Type', attachment.mimeType || 'application/octet-stream');
+      stream.pipe(res);
+    } catch (err) {
+      console.error('Error streaming file from storage:', err);
+      return res.status(500).json({ message: 'Error retrieving file', error: err.message });
+    }
   } catch (error) {
     console.error('Error downloading attachment:', error);
     res.status(500).json({ message: 'Server error downloading file', error: error.message });
@@ -195,7 +226,12 @@ exports.deleteAttachment = async (req, res) => {
 
     // Delete file from storage
     try {
-      await fs.unlink(attachment.storageUrl);
+      const localUploadsPath = path.join(__dirname, '../../uploads');
+      if (attachment.fileUrl && attachment.fileUrl.startsWith(localUploadsPath)) {
+        await fs.unlink(attachment.fileUrl).catch(() => {});
+      } else {
+        await storageHelper.deleteFile(attachment.fileKey || attachment.fileUrl).catch(() => {});
+      }
     } catch (error) {
       console.error('Error deleting file from storage:', error);
       // Continue anyway to delete DB record
@@ -218,7 +254,7 @@ exports.getAttachmentById = async (req, res) => {
     const userId = req.user.id;
 
     const attachment = await HealthDataAttachment.findById(id)
-      .select('-storageUrl -checksum');
+      .select('-fileUrl -fileKey -checksum');
     
     if (!attachment) {
       return res.status(404).json({ message: 'Attachment not found' });

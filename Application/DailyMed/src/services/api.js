@@ -1,27 +1,46 @@
 import axios from 'axios';
 import { getStoredToken, saveAuthData, clearAuthData } from '../utils/authStorage';
+import { getAPIBaseURL, getRequestTimeout, logAPIConfig } from '../config/api';
 
-// Base API URL - Update this with your backend server URL
-// For local development on physical device, use your computer's IP address
-// For Android emulator, use 10.0.2.2
-// For iOS simulator, use localhost
-const API_BASE_URL = 'http://192.168.10.8:5000/api'; // Change this based on your setup
+/**
+ * Initialize and configure the main axios instance
+ * Uses centralized API configuration for environment management
+ */
+const createAPIClient = () => {
+  const api = axios.create({
+    baseURL: getAPIBaseURL(),
+    timeout: getRequestTimeout(),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
 
-// Create axios instance
-const api = axios.create({
-  baseURL: API_BASE_URL,
-  timeout: 10000,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
+  // Log configuration on app startup (development only)
+  try {
+    if (__DEV__) {
+      logAPIConfig();
+    }
+  } catch (e) {
+    // __DEV__ not available, skip logging
+  }
 
-// Request interceptor to add token
+  return api;
+};
+
+const api = createAPIClient();
+
+/**
+ * Request interceptor: Adds JWT token to all requests
+ */
 api.interceptors.request.use(
   async (config) => {
-    const token = await getStoredToken();
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+    try {
+      const token = await getStoredToken();
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
+    } catch (error) {
+      console.error('[API] Error retrieving token:', error);
     }
     return config;
   },
@@ -30,14 +49,28 @@ api.interceptors.request.use(
   }
 );
 
-// Response interceptor to handle errors
+/**
+ * Response interceptor: Handles errors and invalid tokens
+ * - 401: Invalid/expired token - clears auth data
+ * - 5xx: Server errors - logs for debugging
+ */
 api.interceptors.response.use(
   (response) => response,
   async (error) => {
+    // Handle 401 Unauthorized - token expired or invalid
     if (error.response?.status === 401) {
-      // Token expired or invalid - clear storage
-      await clearAuthData();
+      try {
+        await clearAuthData();
+      } catch (e) {
+        console.error('[API] Error clearing auth data:', e);
+      }
     }
+
+    // Log server errors for debugging (development only)
+    if (error.response?.status >= 500) {
+      console.error('[API] Server error:', error.response?.status, error.response?.data);
+    }
+
     return Promise.reject(error);
   }
 );
@@ -214,9 +247,7 @@ export const adminAPI = {
     if (isVerified !== undefined && isVerified !== null) {
       payload.isVerified = isVerified;
     }
-    console.log('API updateUserStatus called with:', { userId, accountStatus, isVerified, payload });
     const response = await api.put(`/admin/users/${userId}/status`, payload);
-    console.log('API updateUserStatus response:', response.data);
     return response.data;
   },
 
@@ -262,6 +293,64 @@ export const medicationsAPI = {
   // Delete medication
   deleteMedication: async (id) => {
     const response = await api.delete(`/medications/${id}`);
+    return response.data;
+  },
+};
+
+// Notification API endpoints
+export const notificationAPI = {
+  /**
+   * Save push notification token to backend
+   * Should be called after obtaining Expo push token
+   * @param {string} token - Expo push notification token
+   */
+  saveNotificationToken: async (token) => {
+    const response = await api.post('/notifications/token', { token });
+    return response.data;
+  },
+
+  /**
+   * Get all notifications for current user
+   * @param {number} page - Page number (default: 1)
+   * @param {number} limit - Items per page (default: 10)
+   */
+  getNotifications: async (page = 1, limit = 10) => {
+    const response = await api.get(`/notifications?page=${page}&limit=${limit}`);
+    return response.data;
+  },
+
+  /**
+   * Mark notification as read
+   * @param {string} notificationId - ID of notification
+   */
+  markAsRead: async (notificationId) => {
+    const response = await api.patch(`/notifications/${notificationId}/read`);
+    return response.data;
+  },
+
+  /**
+   * Mark all notifications as read
+   */
+  markAllAsRead: async () => {
+    const response = await api.patch('/notifications/read-all');
+    return response.data;
+  },
+
+  /**
+   * Delete a notification
+   * @param {string} notificationId - ID of notification
+   */
+  deleteNotification: async (notificationId) => {
+    const response = await api.delete(`/notifications/${notificationId}`);
+    return response.data;
+  },
+
+  /**
+   * Update notification preferences
+   * @param {object} preferences - Notification preferences
+   */
+  updatePreferences: async (preferences) => {
+    const response = await api.put('/notifications/preferences', preferences);
     return response.data;
   },
 };

@@ -25,6 +25,7 @@ import AdminDashboard from './src/screens/admin/dashboard';
 import AdminUsers from './src/screens/admin/users';
 import { getAuthData } from './src/utils/authStorage';
 import { Colors } from './constants/theme';
+import NotificationService from './src/services/notificationService';
 
 const Stack = createNativeStackNavigator();
 
@@ -41,19 +42,39 @@ export default function App() {
   const [initialParams, setInitialParams] = useState(null);
 
   useEffect(() => {
-    checkSession();
+    initializeApp();
   }, []);
 
+  /**
+   * Initialize app on startup
+   * - Check authentication session
+   * - Setup push notifications
+   * - Configure notification listeners
+   */
+  const initializeApp = async () => {
+    try {
+      // Check session
+      await checkSession();
+
+      // Initialize push notifications (non-blocking)
+      await initializeNotifications();
+    } catch (error) {
+      console.error('[App] Initialization error:', error);
+    } finally {
+      setIsCheckingSession(false);
+    }
+  };
+
+  /**
+   * Check if user has valid session
+   */
   const checkSession = async () => {
     try {
       const authData = await getAuthData();
       
-      console.log('App.js - Auth data:', JSON.stringify(authData, null, 2));
-      
       if (authData && authData.isValid && authData.user) {
         // Valid session exists - redirect to appropriate dashboard
         const { role } = authData.user;
-        console.log('App.js - User role from storage:', role);
         
         const dashboardMap = {
           patient: 'Dashboard',
@@ -62,7 +83,6 @@ export default function App() {
         };
         
         const targetRoute = dashboardMap[role] || 'Login';
-        console.log('App.js - Setting initial route to:', targetRoute);
         
         setInitialRoute(targetRoute);
         setInitialParams({ user: authData.user });
@@ -71,10 +91,104 @@ export default function App() {
         setInitialRoute('SplashScreen1');
       }
     } catch (error) {
-      console.error('Session check error:', error);
+      console.error('[App] Session check error:', error);
       setInitialRoute('SplashScreen1');
-    } finally {
-      setIsCheckingSession(false);
+    }
+  };
+
+  /**
+   * Setup push notifications
+   * Runs in background and doesn't block app initialization
+   */
+  const initializeNotifications = async () => {
+    try {
+      // Initialize notification service
+      const result = await NotificationService.initialize();
+
+      if (!result.success) {
+        console.warn('[App] Notification initialization warning:', result.message);
+        return;
+      }
+
+      // Setup listener for notifications received in foreground
+      const notificationListener = NotificationService.listenForNotifications((notification) => {
+        handleNotificationReceived(notification);
+      });
+
+      // Setup listener for notification responses (user taps notification)
+      const responseListener = NotificationService.listenForNotificationResponses((response) => {
+        handleNotificationResponse(response);
+      });
+
+      // Cleanup listeners on app unmount (handled by React cleanup)
+      return () => {
+        NotificationService.removeListener(notificationListener);
+        NotificationService.removeListener(responseListener);
+      };
+    } catch (error) {
+      console.warn('[App] Notification setup error:', error);
+      // Don't block app initialization if notifications fail
+    }
+  };
+
+  /**
+   * Handle incoming notification
+   * Called when app receives notification while in foreground
+   */
+  const handleNotificationReceived = (notification) => {
+    console.log('[App] Notification received:', notification.title);
+    
+    // Process notification based on type
+    const { type, data } = notification;
+    
+    switch (type) {
+      case 'medication_reminder':
+        console.log('[App] Medication reminder:', data.medicationName);
+        break;
+      case 'appointment_reminder':
+        console.log('[App] Appointment reminder:', data.appointmentTime);
+        break;
+      case 'abnormal_vitals':
+        console.log('[App] Abnormal vitals alert:', data.vitalType);
+        break;
+      case 'doctor_request':
+        console.log('[App] New doctor request from:', data.doctorName);
+        break;
+      default:
+        console.log('[App] General notification:', notification.body);
+    }
+  };
+
+  /**
+   * Handle notification response
+   * Called when user taps on a notification
+   */
+  const handleNotificationResponse = (response) => {
+    console.log('[App] User tapped notification:', response.title);
+    
+    const { type, data } = response;
+    
+    // Navigate to appropriate screen based on notification type
+    // This would be called with navigation object in production
+    switch (type) {
+      case 'medication_reminder':
+        // Navigate to medications screen
+        console.log('[App] Would navigate to Medications screen');
+        break;
+      case 'appointment_reminder':
+        // Navigate to appointments screen
+        console.log('[App] Would navigate to Appointments screen');
+        break;
+      case 'abnormal_vitals':
+        // Navigate to health data/alerts screen
+        console.log('[App] Would navigate to Alerts screen');
+        break;
+      case 'doctor_request':
+        // Navigate to doctor requests screen
+        console.log('[App] Would navigate to Doctor Requests screen');
+        break;
+      default:
+        console.log('[App] Handle general notification response');
     }
   };
 

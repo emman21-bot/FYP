@@ -1,7 +1,7 @@
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const AuditLog = require('../models/AuditLog');
-const Notification = require('../models/Notification');
+const { createNotification } = require('../utils/notificationHelper');
 const HealthData = require('../models/HealthData');
 const Appointment = require('../models/Appointment');
 const Medication = require('../models/Medication');
@@ -36,7 +36,7 @@ const createAuditLog = async (req, action, resourceType, resourceId, targetUserI
 // Helper function to send notification to user
 const sendUserNotification = async (userId, userEmail, type, title, message, data = {}) => {
   try {
-    await Notification.create({
+    await createNotification({
       userId,
       userEmail,
       type,

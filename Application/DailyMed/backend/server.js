@@ -1,5 +1,6 @@
 const path = require('path');
 require('dotenv').config({ path: path.join(__dirname, '.env') });
+const http = require('http');
 const express = require('express');
 const cors = require('cors');
 const connectDB = require('./config/database');
@@ -27,6 +28,17 @@ const { apiLimiter } = require('./middlewares/rateLimiter');
 const sanitizeInput = require('./middlewares/sanitize');
 const { startDailyReminderCron } = require('./jobs/dailyReminderCron');
 const { startAppointmentCleanupCron } = require('./jobs/cancelledAppointmentCleanup');
+const { startAppointmentReminderCron } = require('./jobs/appointmentReminderCron');
+const { verifyEmailConfig } = require('./utils/emailService');
+const { attachSocketServer } = require('./utils/socketService');
+
+// Start queue workers (if available)
+try {
+  require('./queues/emailWorker');
+  console.log('✅ Email worker started');
+} catch (err) {
+  console.warn('⚠️ Email worker not started (optional):', err.message);
+}
 
 // Initialize express app
 const app = express();
@@ -37,9 +49,19 @@ connectDB();
 // Start cron jobs
 startDailyReminderCron();
 startAppointmentCleanupCron();
+startAppointmentReminderCron();
 
 // Security middleware - trust proxy for rate limiting behind reverse proxy
 app.set('trust proxy', 1);
+
+// Verify email configuration on startup
+verifyEmailConfig().then((isValid) => {
+  if (!isValid) {
+    console.warn('⚠️ Email transport is not configured correctly. OTP delivery will fail until SMTP credentials are fixed.');
+  }
+}).catch((err) => {
+  console.error('⚠️ Error verifying email transport:', err);
+});
 
 // Middleware
 app.use(cors({
@@ -108,8 +130,10 @@ app.use(errorHandler);
 
 // Start server
 const PORT = process.env.PORT || 5000;
+const server = http.createServer(app);
+attachSocketServer(server);
 
-app.listen(PORT, () => {
+server.listen(PORT, '0.0.0.0', () => {
   console.log(`
 ╔═══════════════════════════════════════════╗
 ║                                           ║

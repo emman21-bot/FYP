@@ -5,7 +5,9 @@ const {
   getUserProfile,
   updateProfile,
   updateMedicalInfo,
-  updateNotificationPreferences
+  updateNotificationPreferences,
+  registerPushToken,
+  unregisterPushToken
 } = require('../controllers/userProfileController');
 
 // All routes require authentication
@@ -22,5 +24,9 @@ router.put('/medical', updateMedicalInfo);
 
 // Update notification preferences
 router.put('/notifications', updateNotificationPreferences);
+
+// Register/remove push notification tokens
+router.post('/push-token', registerPushToken);
+router.delete('/push-token', unregisterPushToken);
 
 module.exports = router;

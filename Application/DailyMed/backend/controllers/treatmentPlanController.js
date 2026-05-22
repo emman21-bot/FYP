@@ -1,6 +1,6 @@
 const TreatmentPlan = require('../models/TreatmentPlan');
 const CareRelationship = require('../models/CareRelationship');
-const Notification = require('../models/Notification');
+const { createNotification } = require('../utils/notificationHelper');
 const { createAuditLog } = require('../utils/auditHelper');
 
 // Doctor creates treatment plan for patient
@@ -65,7 +65,7 @@ exports.createTreatmentPlan = async (req, res) => {
     });
 
     // Notify patient
-    await Notification.create({
+    await createNotification({
       userId: careRelationship.patientId,
       userEmail: patientEmail,
       type: 'treatment_plan_created',
@@ -161,7 +161,7 @@ exports.updateTreatmentPlan = async (req, res) => {
     });
 
     // Notify patient
-    await Notification.create({
+    await createNotification({
       userId: currentPlan.patientId,
       userEmail: currentPlan.patientEmail,
       type: 'treatment_plan_updated',
@@ -299,7 +299,7 @@ exports.deactivateTreatmentPlan = async (req, res) => {
     await treatmentPlan.save();
 
     // Notify patient
-    await Notification.create({
+    await createNotification({
       userId: treatmentPlan.patientId,
       userEmail: treatmentPlan.patientEmail,
       type: 'treatment_plan_deactivated',

@@ -4,7 +4,17 @@
     "slug": "DailyMed",
     "version": "1.0.0",
     "plugins": [
-      "expo-font"
-    ]
+      "expo-font",
+      "@react-native-community/datetimepicker",
+      "expo-sharing"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "68d8a0cc-a5fb-49d4-bd0a-5dc2980faca1"
+      }
+    },
+    "android": {
+      "package": "com.emman21.DailyMed"
+    }
   }
 }

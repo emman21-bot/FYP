@@ -1,20 +1,59 @@
 const nodemailer = require('nodemailer');
 
-// Create reusable transporter object using Gmail SMTP
+const getSmtpConfig = () => {
+  const smtpHost = process.env.SMTP_HOST || process.env.EMAIL_HOST || 'smtp.gmail.com';
+  const smtpPort = parseInt(process.env.SMTP_PORT || process.env.EMAIL_PORT || '587', 10);
+  const smtpUser = process.env.SMTP_USER || process.env.EMAIL_USER;
+  const smtpPass = process.env.SMTP_PASSWORD || process.env.EMAIL_PASSWORD;
+  const smtpFrom = process.env.SMTP_FROM || smtpUser || process.env.EMAIL_USER;
+
+  const missing = [];
+  if (!smtpUser) missing.push('SMTP_USER|EMAIL_USER');
+  if (!smtpPass) missing.push('SMTP_PASSWORD|EMAIL_PASSWORD');
+  if (!smtpFrom) missing.push('SMTP_FROM|SMTP_USER|EMAIL_USER');
+
+  if (missing.length) {
+    throw new Error(`Missing SMTP configuration: ${missing.join(', ')}`);
+  }
+
+  return {
+    smtpHost,
+    smtpPort,
+    smtpUser,
+    smtpPass,
+    smtpFrom,
+  };
+};
+
 const createTransporter = () => {
-  return nodemailer.createTransporter({
-    service: 'gmail',
-    host: 'smtp.gmail.com',
-    port: 587,
-    secure: false, // Use TLS
+  const { smtpHost, smtpPort, smtpUser, smtpPass } = getSmtpConfig();
+  const secure = smtpPort === 465;
+  const transporterOptions = {
+    host: smtpHost,
+    port: smtpPort,
+    secure,
     auth: {
-      user: process.env.EMAIL_USER || 'theuniquethreadsfyp@gmail.com',
-      pass: process.env.EMAIL_PASSWORD // Gmail app password
+      user: smtpUser,
+      pass: smtpPass,
     },
     tls: {
-      rejectUnauthorized: false
-    }
-  });
+      rejectUnauthorized: false,
+    },
+  };
+
+  if (smtpHost.includes('gmail')) {
+    transporterOptions.service = 'gmail';
+  }
+
+  return nodemailer.createTransport(transporterOptions);
+};
+
+const getFromAddress = () => {
+  const { smtpFrom } = getSmtpConfig();
+  return {
+    name: 'DailyMed',
+    address: smtpFrom,
+  };
 };
 
 // Send email function
@@ -23,14 +62,11 @@ exports.sendEmail = async ({ email, subject, html, text }) => {
     const transporter = createTransporter();
 
     const mailOptions = {
-      from: {
-        name: 'DailyMed',
-        address: process.env.EMAIL_USER || 'theuniquethreadsfyp@gmail.com'
-      },
+      from: getFromAddress(),
       to: email,
-      subject: subject,
-      html: html,
-      text: text || '' // Fallback text version
+      subject,
+      html,
+      text: text || '',
     };
 
     const info = await transporter.sendMail(mailOptions);
@@ -51,14 +87,11 @@ exports.sendBulkEmails = async (emails) => {
     for (const emailData of emails) {
       try {
         const mailOptions = {
-          from: {
-            name: 'DailyMed',
-            address: process.env.EMAIL_USER || 'theuniquethreadsfyp@gmail.com'
-          },
+          from: getFromAddress(),
           to: emailData.email,
           subject: emailData.subject,
           html: emailData.html,
-          text: emailData.text || ''
+          text: emailData.text || '',
         };
 
         const info = await transporter.sendMail(mailOptions);

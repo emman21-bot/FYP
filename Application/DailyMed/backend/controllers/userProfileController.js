@@ -46,7 +46,8 @@ exports.getUserProfile = async (req, res) => {
           apptReminders: user.notificationPreferences?.apptReminders ?? true,
           weeklyReports: user.notificationPreferences?.weeklyReports ?? true,
           securityAlerts: user.notificationPreferences?.securityAlerts ?? true
-        }
+        },
+        pushTokens: user.pushTokens || []
       }
     });
   } catch (error) {
@@ -228,6 +229,84 @@ exports.updateNotificationPreferences = async (req, res) => {
     res.status(500).json({
       success: false,
       message: 'Failed to update notification preferences',
+      error: error.message
+    });
+  }
+};
+
+// Register a device push token for the authenticated user
+exports.registerPushToken = async (req, res) => {
+  try {
+    const userId = req.user._id;
+    const { token } = req.body;
+
+    if (!token) {
+      return res.status(400).json({
+        success: false,
+        message: 'Push token is required'
+      });
+    }
+
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: 'User not found'
+      });
+    }
+
+    user.pushTokens = Array.from(new Set([...(user.pushTokens || []), token]));
+    await user.save();
+
+    res.status(200).json({
+      success: true,
+      message: 'Push token registered successfully',
+      data: { pushTokens: user.pushTokens }
+    });
+  } catch (error) {
+    console.error('Register push token error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to register push token',
+      error: error.message
+    });
+  }
+};
+
+// Unregister a device push token for the authenticated user
+exports.unregisterPushToken = async (req, res) => {
+  try {
+    const userId = req.user._id;
+    const { token } = req.body;
+
+    if (!token) {
+      return res.status(400).json({
+        success: false,
+        message: 'Push token is required'
+      });
+    }
+
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: 'User not found'
+      });
+    }
+
+    user.pushTokens = (user.pushTokens || []).filter((savedToken) => savedToken !== token);
+    await user.save();
+
+    res.status(200).json({
+      success: true,
+      message: 'Push token removed successfully',
+      data: { pushTokens: user.pushTokens }
+    });
+  } catch (error) {
+    console.error('Unregister push token error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to unregister push token',
       error: error.message
     });
   }

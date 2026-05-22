@@ -4,7 +4,7 @@ const TreatmentPlan = require('../models/TreatmentPlan');
 const ModelRun = require('../models/ModelRun');
 const HealthData = require('../models/HealthData');
 const GlucoseSeries = require('../models/GlucoseSeries');
-const Notification = require('../models/Notification');
+const { createNotification } = require('../utils/notificationHelper');
 const { createAuditLog } = require('../utils/auditHelper');
 const axios = require('axios');
 
@@ -134,7 +134,7 @@ exports.generateDosageSuggestion = async (req, res) => {
       });
 
       // Notify doctor for review
-      await Notification.create({
+      await createNotification({
         userId: careRelationship.doctorId,
         userEmail: doctorEmail,
         type: 'dosage_review_requested',
@@ -150,7 +150,7 @@ exports.generateDosageSuggestion = async (req, res) => {
       });
 
       // Notify patient
-      await Notification.create({
+      await createNotification({
         userId: patientId,
         userEmail: patientEmail,
         type: 'dosage_suggestion_generated',
@@ -262,7 +262,7 @@ exports.approveDosageSuggestion = async (req, res) => {
     await dosageSuggestion.save();
 
     // Notify patient
-    await Notification.create({
+    await createNotification({
       userId: dosageSuggestion.patientId,
       userEmail: dosageSuggestion.patientEmail,
       type: 'dosage_suggestion_approved',
@@ -341,7 +341,7 @@ exports.rejectDosageSuggestion = async (req, res) => {
     await dosageSuggestion.save();
 
     // Notify patient
-    await Notification.create({
+    await createNotification({
       userId: dosageSuggestion.patientId,
       userEmail: dosageSuggestion.patientEmail,
       type: 'dosage_suggestion_rejected',
@@ -433,7 +433,7 @@ exports.applyDosageSuggestion = async (req, res) => {
     });
 
     // Notify doctor
-    await Notification.create({
+    await createNotification({
       userId: dosageSuggestion.doctorId,
       userEmail: dosageSuggestion.doctorEmail,
       type: 'dosage_suggestion_applied',
