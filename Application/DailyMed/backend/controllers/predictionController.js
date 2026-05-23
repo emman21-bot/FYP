@@ -2,7 +2,7 @@ const ModelRun = require('../models/ModelRun');
 const PredictionFeedback = require('../models/PredictionFeedback');
 const HealthData = require('../models/HealthData');
 const GlucoseSeries = require('../models/GlucoseSeries');
-const { createNotification } = require('../utils/notificationHelper');
+const Notification = require('../models/Notification');
 const axios = require('axios');
 
 // ML Service URL (Python FastAPI microservice)
@@ -59,7 +59,7 @@ exports.predictHypertension = async (req, res) => {
 
     // Create notification if high risk
     if (prediction.has_hypertension_risk && prediction.risk_level === 'HIGH') {
-      await createNotification({
+      await Notification.create({
         userId,
         userEmail,
         type: 'health_alert',
@@ -149,7 +149,7 @@ exports.forecastGlucose = async (req, res) => {
 
     // Create alert if risky glucose levels predicted
     if (prediction.risk_zone === 'HYPOGLYCEMIA' || prediction.risk_zone === 'HYPERGLYCEMIA') {
-      await createNotification({
+      await Notification.create({
         userId,
         userEmail,
         type: 'health_alert',

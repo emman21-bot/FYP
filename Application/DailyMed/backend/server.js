@@ -1,6 +1,4 @@
-const path = require('path');
-require('dotenv').config({ path: path.join(__dirname, '.env') });
-const http = require('http');
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const connectDB = require('./config/database');
@@ -21,24 +19,11 @@ const healthDataAttachmentRoutes = require('./routes/healthDataAttachment');
 const treatmentPlanRoutes = require('./routes/treatmentPlan');
 const doctorRoutes = require('./routes/doctor');
 const analyticsRoutes = require('./routes/analytics');
-const supportRoutes = require('./routes/support');
-const adminSettingsRoutes = require('./routes/adminSettings');
 const errorHandler = require('./middlewares/errorHandler');
 const { apiLimiter } = require('./middlewares/rateLimiter');
 const sanitizeInput = require('./middlewares/sanitize');
 const { startDailyReminderCron } = require('./jobs/dailyReminderCron');
 const { startAppointmentCleanupCron } = require('./jobs/cancelledAppointmentCleanup');
-const { startAppointmentReminderCron } = require('./jobs/appointmentReminderCron');
-const { verifyEmailConfig } = require('./utils/emailService');
-const { attachSocketServer } = require('./utils/socketService');
-
-// Start queue workers (if available)
-try {
-  require('./queues/emailWorker');
-  console.log('✅ Email worker started');
-} catch (err) {
-  console.warn('⚠️ Email worker not started (optional):', err.message);
-}
 
 // Initialize express app
 const app = express();
@@ -49,19 +34,9 @@ connectDB();
 // Start cron jobs
 startDailyReminderCron();
 startAppointmentCleanupCron();
-startAppointmentReminderCron();
 
 // Security middleware - trust proxy for rate limiting behind reverse proxy
 app.set('trust proxy', 1);
-
-// Verify email configuration on startup
-verifyEmailConfig().then((isValid) => {
-  if (!isValid) {
-    console.warn('⚠️ Email transport is not configured correctly. OTP delivery will fail until SMTP credentials are fixed.');
-  }
-}).catch((err) => {
-  console.error('⚠️ Error verifying email transport:', err);
-});
 
 // Middleware
 app.use(cors({
@@ -113,8 +88,6 @@ app.use('/api/health-data', healthDataAttachmentRoutes); // Attachment routes un
 app.use('/api/treatment-plans', treatmentPlanRoutes);
 app.use('/api/doctors', doctorRoutes);
 app.use('/api/analytics', analyticsRoutes);
-app.use('/api/support', supportRoutes);
-app.use('/api/admin/settings', adminSettingsRoutes);
 app.use('/api/treatment-plans', treatmentPlanRoutes);
 
 // 404 handler
@@ -130,10 +103,8 @@ app.use(errorHandler);
 
 // Start server
 const PORT = process.env.PORT || 5000;
-const server = http.createServer(app);
-attachSocketServer(server);
 
-server.listen(PORT, '0.0.0.0', () => {
+app.listen(PORT, () => {
   console.log(`
 ╔═══════════════════════════════════════════╗
 ║                                           ║

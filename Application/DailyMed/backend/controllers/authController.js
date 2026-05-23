@@ -42,28 +42,25 @@ const register = async (req, res) => {
       role: role.toLowerCase(),
       fullName: username // Initialize fullName with username
     });
-    console.log('[Register] User created:', user.email, 'id:', user._id);
 
     // Generate OTP
     const otp = generateOTP();
-    console.log('[Register] Generated OTP for:', email);
 
     // Delete any existing OTPs for this email
     await OTP.deleteMany({ email });
 
     // Save OTP to database
-    const otpRecord = await OTP.create({
+    await OTP.create({
       email,
       otp
     });
-    console.log('[Register] OTP record saved:', otpRecord._id, 'for', email);
 
     // Send OTP email
     try {
       await sendOTPEmail(email, otp, username);
-      console.log('[Register] Verification email sent to:', email);
     } catch (emailError) {
-      console.error('[Register] OTP email send failed for:', email, emailError);
+      // If email fails, still allow registration but notify
+      console.error('Email sending failed:', emailError);
       return res.status(201).json({
         success: true,
         message: 'User registered successfully, but verification email failed to send. Please request a new OTP.',

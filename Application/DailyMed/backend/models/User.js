@@ -151,10 +151,6 @@ const userSchema = new mongoose.Schema({
       type: Boolean,
       default: true
     }
-  },
-  pushTokens: {
-    type: [String],
-    default: []
   }
 }, {
   timestamps: true

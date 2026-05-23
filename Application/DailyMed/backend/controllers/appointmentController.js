@@ -3,13 +3,6 @@ const DoctorProfile = require('../models/DoctorProfile');
 const User = require('../models/User');
 const { createZoomMeeting, deleteZoomMeeting, updateZoomMeeting, createInstantZoomMeeting } = require('../utils/zoomHelper');
 const { createNotification, notificationTemplates } = require('../utils/notificationHelper');
-const { appointmentApprovedTemplate, appointmentReminderTemplate } = require('../utils/emailTemplates');
-let emailQueue;
-try {
-  ({ emailQueue } = require('../utils/queue') || {});
-} catch (err) {
-  // queue may be unavailable in some environments
-}
 
 // @desc    Create new appointment (Patient)
 // @route   POST /api/appointments
@@ -283,64 +276,18 @@ exports.approveAppointment = async (req, res) => {
     appointment.status = 'approved';
     await appointment.save();
 
-    // Schedule a delayed reminder job for 24 hours before the appointment (if possible)
+    // Send email to patient
     try {
-      const startParts = appointment.timeSlot.startTime.split(':');
-      const apptDateTime = new Date(appointment.appointmentDate);
-      apptDateTime.setHours(parseInt(startParts[0], 10), parseInt(startParts[1], 10), 0, 0);
+      const emailTemplate = appointmentApprovedTemplate({
+        patientName: appointment.patientName,
+        doctorName: appointment.doctorName,
+        appointmentDate: appointment.appointmentDate,
+        timeSlot: appointment.timeSlot,
+        zoomLink: appointment.zoomMeetingLink,
+        zoomPassword: appointment.zoomPassword
+      });
 
-      const reminderAt = new Date(apptDateTime.getTime() - 24 * 60 * 60 * 1000);
-      const now = new Date();
-
-      if (reminderAt > now) {
-        const delay = reminderAt.getTime() - now.getTime();
-        if ((process.env.USE_EMAIL_QUEUE || 'false').toLowerCase() === 'true' && emailQueue) {
-          const patientTemplate = appointmentReminderTemplate({
-            recipientName: appointment.patientName,
-            recipientType: 'patient',
-            doctorName: appointment.doctorName,
-            patientName: appointment.patientName,
-            appointmentDate: appointment.appointmentDate,
-            timeSlot: appointment.timeSlot,
-            zoomLink: appointment.zoomMeetingLink,
-            zoomPassword: appointment.zoomPassword
-          });
-
-          const doctorTemplate = appointmentReminderTemplate({
-            recipientName: appointment.doctorName,
-            recipientType: 'doctor',
-            doctorName: appointment.doctorName,
-            patientName: appointment.patientName,
-            appointmentDate: appointment.appointmentDate,
-            timeSlot: appointment.timeSlot,
-            zoomLink: appointment.zoomMeetingLink,
-            zoomPassword: appointment.zoomPassword
-          });
-
-          await emailQueue.add('appointmentReminder', {
-            email: appointment.patientEmail,
-            subject: patientTemplate.subject,
-            html: patientTemplate.html
-          }, { delay, attempts: 3, backoff: { type: 'exponential', delay: 60000 } });
-
-          await emailQueue.add('appointmentReminder', {
-            email: appointment.doctorEmail,
-            subject: doctorTemplate.subject,
-            html: doctorTemplate.html
-          }, { delay, attempts: 3, backoff: { type: 'exponential', delay: 60000 } });
-
-          // Mark reminder scheduled so cron won't duplicate
-          appointment.reminderSent = true;
-          await appointment.save();
-          console.log(`⏳ Scheduled reminder for appointment ${appointment._id} at ${reminderAt.toISOString()}`);
-        }
-      }
-    } catch (schedErr) {
-      console.error('Error scheduling reminder job:', schedErr);
-    }
-
-    // Send notification to patient and enqueue/send approval email
-    try {
+      // Send notification to patient
       const patientNotification = notificationTemplates.appointmentApproved({
         appointmentId: appointment._id,
         doctorName: appointment.doctorName,
@@ -354,36 +301,8 @@ exports.approveAppointment = async (req, res) => {
         userEmail: appointment.patientEmail,
         ...patientNotification
       });
-
-      // Build email template
-      const emailTemplate = appointmentApprovedTemplate({
-        patientName: appointment.patientName,
-        doctorName: appointment.doctorName,
-        appointmentDate: appointment.appointmentDate,
-        timeSlot: appointment.timeSlot,
-        zoomLink: appointment.zoomMeetingLink,
-        zoomPassword: appointment.zoomPassword
-      });
-
-      // Enqueue email if queue enabled, otherwise send directly
-      if ((process.env.USE_EMAIL_QUEUE || 'false').toLowerCase() === 'true' && emailQueue) {
-        await emailQueue.add('sendEmail', {
-          email: appointment.patientEmail,
-          subject: emailTemplate.subject,
-          html: emailTemplate.html
-        }, { attempts: 5, backoff: { type: 'exponential', delay: 60000 } });
-        console.log('📥 Enqueued appointment approval email for', appointment.patientEmail);
-      } else {
-        try {
-          const { sendEmail } = require('../utils/emailHelper');
-          await sendEmail({ email: appointment.patientEmail, subject: emailTemplate.subject, html: emailTemplate.html });
-          console.log('✉️ Sent appointment approval email to', appointment.patientEmail);
-        } catch (emailErr) {
-          console.error('Error sending approval email directly:', emailErr);
-        }
-      }
     } catch (notificationError) {
-      console.error('Error creating notification or sending email:', notificationError);
+      console.error('Error creating notification:', notificationError);
     }
 
     res.status(200).json({

@@ -1,32 +1,4 @@
 const Notification = require('../models/Notification');
-const User = require('../models/User');
-const { sendPushNotification } = require('./pushService');
-const { emitToUser } = require('./socketService');
-
-const pushPreferenceMap = {
-  health_alert: 'healthAlerts',
-  reminder_due: 'apptReminders',
-  appointment_request: 'apptReminders',
-  appointment_approved: 'apptReminders',
-  appointment_declined: 'apptReminders',
-  appointment_rescheduled: 'apptReminders',
-  appointment_cancelled: 'apptReminders',
-  dosage_review_requested: 'medReminders',
-  dosage_suggestion_generated: 'medReminders',
-  dosage_suggestion_approved: 'medReminders',
-  dosage_suggestion_rejected: 'medReminders',
-  treatment_plan_created: 'weeklyReports',
-  treatment_plan_updated: 'weeklyReports',
-  treatment_plan_deactivated: 'weeklyReports'
-};
-
-const isPushAllowed = (preferences = {}, notificationType) => {
-  const preferenceKey = pushPreferenceMap[notificationType];
-  if (!preferenceKey) {
-    return true;
-  }
-  return preferences[preferenceKey] !== false;
-};
 
 // Create notification
 const createNotification = async ({ userId, userEmail, type, title, message, data = {} }) => {
@@ -39,31 +11,6 @@ const createNotification = async ({ userId, userEmail, type, title, message, dat
       message,
       data
     });
-
-    emitToUser(userId, 'notification', notification);
-
-    try {
-      const user = await User.findById(userId).select('pushTokens notificationPreferences');
-      const pushTokens = [...new Set((user?.pushTokens || []).filter(Boolean))];
-
-      if (pushTokens.length && isPushAllowed(user?.notificationPreferences, type)) {
-        const pushData = {
-          type,
-          ...data
-        };
-
-        await Promise.allSettled(pushTokens.map(async (token) => {
-          try {
-            await sendPushNotification(token, title, message, pushData);
-          } catch (pushError) {
-            console.error('Push notification failed for token:', token, pushError.message || pushError);
-          }
-        }));
-      }
-    } catch (pushError) {
-      console.error('Error sending push notification:', pushError);
-    }
-
     return notification;
   } catch (error) {
     console.error('Error creating notification:', error);
@@ -75,9 +22,6 @@ const createNotification = async ({ userId, userEmail, type, title, message, dat
 const createBulkNotifications = async (notifications) => {
   try {
     const created = await Notification.insertMany(notifications);
-    created.forEach((notification) => {
-      emitToUser(notification.userId, 'notification', notification);
-    });
     return created;
   } catch (error) {
     console.error('Error creating bulk notifications:', error);

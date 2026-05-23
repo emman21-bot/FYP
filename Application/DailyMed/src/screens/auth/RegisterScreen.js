@@ -96,26 +96,8 @@ const RegisterScreen = ({ navigation }) => {
       };
 
       const response = await authAPI.register(userData);
-      console.log('[RegisterScreen] Registration response:', response);
       
       if (response.success) {
-        if (response.emailSent === false) {
-          setAlertConfig({
-            visible: true,
-            type: 'warning',
-            title: 'Email Send Failed',
-            message: 'Your account was created, but the verification email could not be delivered. Please resend OTP or contact support.',
-            buttons: [
-              {
-                text: 'OK',
-                onPress: () => setAlertConfig({ ...alertConfig, visible: false }),
-                style: 'primary',
-              },
-            ],
-          });
-          return;
-        }
-
         setAlertConfig({
           visible: true,
           type: 'success',
