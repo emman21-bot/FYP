@@ -16,7 +16,7 @@ import { careRelationshipAPI } from '../../services/careRelationshipAPI';
 import axios from 'axios';
 import CustomAlert from '../../components/CustomAlert';
 
-const API_URL = 'http://192.168.1.71:5000/api';
+const API_URL = 'http://192.168.10.6:5000/api';
 
 const FindDoctorScreen = ({ navigation }) => {
   const [doctors, setDoctors] = useState([]);

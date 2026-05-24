@@ -22,7 +22,7 @@ import { Feather, MaterialCommunityIcons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
-const API_URL = 'http://192.168.1.71:5000/api';
+const API_URL = 'http://192.168.10.6:5000/api';
 
 const AppointmentsScreen = ({ navigation }) => {
   const [drawerVisible, setDrawerVisible] = useState(false);

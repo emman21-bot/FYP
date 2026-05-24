@@ -15,7 +15,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Ionicons } from '@expo/vector-icons';
 import CustomAlert from '../../components/CustomAlert';
 
-const API_URL = 'http://192.168.100.6:5000/api';
+const API_URL = 'http://192.168.10.6:5000/api';
 
 const DoctorsScreen = ({ navigation }) => {
   const [doctors, setDoctors] = useState([]);

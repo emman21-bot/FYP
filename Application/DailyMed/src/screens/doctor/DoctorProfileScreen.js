@@ -18,7 +18,7 @@ import axios from 'axios';
 import CustomAlert from '../../components/CustomAlert';
 import DoctorDrawer from '../../components/DoctorDrawer';
 
-const API_URL = 'http://192.168.1.71:5000/api';
+const API_URL = 'http://192.168.10.6:5000/api';
 
 const DoctorProfileScreen = ({ navigation }) => {
   const [loading, setLoading] = useState(false);

@@ -17,7 +17,7 @@ import { Colors } from '../../../constants/theme';
 import { Swipeable } from 'react-native-gesture-handler';
 import CustomAlert from '../../components/CustomAlert';
 
-const API_URL = 'http://192.168.1.4:5000/api';
+const API_URL = 'http://192.168.10.6:5000/api';
 import DoctorDrawer from '../../components/DoctorDrawer';
 import { Feather, MaterialCommunityIcons } from '@expo/vector-icons';
 

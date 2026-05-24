@@ -21,7 +21,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Print from 'expo-print';
 import * as Sharing from 'expo-sharing';
 
-const API_URL = 'http://192.168.1.71:5000/api';
+const API_URL = 'http://192.168.10.6:5000/api';
 const { width } = Dimensions.get('window');
 
 const ReportsScreen = ({ navigation }) => {

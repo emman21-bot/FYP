@@ -24,7 +24,7 @@ import CustomAlert from '../../components/CustomAlert';
 import DoctorDrawer from '../../components/DoctorDrawer';
 import { Feather, MaterialCommunityIcons } from '@expo/vector-icons';
 
-const API_URL = 'http://192.168.1.4:5000/api';
+const API_URL = 'http://192.168.10.6:5000/api';
 
 const AppointmentsScreen = ({ navigation }) => {
   const [drawerVisible, setDrawerVisible] = useState(false);

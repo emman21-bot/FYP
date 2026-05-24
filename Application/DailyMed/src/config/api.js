@@ -22,7 +22,7 @@
 // ============================================================================
 
 const DEFAULT_ENV = 'development'; // 'development' | 'ngrok' | 'production'
-const DEFAULT_LOCAL_IP = '192.168.1.71'; // Your local machine IP for development
+const DEFAULT_LOCAL_IP = '192.168.10.6'; // Your local machine IP for development
 const DEFAULT_NGROK_URL = 'https://goofy-shingle-unsterile.ngrok-free.dev'; // Your ngrok URL
 const DEFAULT_PRODUCTION_URL = 'https://api.dailymed.com'; // Your production URL
 

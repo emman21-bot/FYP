@@ -21,7 +21,7 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // For Expo app - use your computer's local network IP
-const API_URL = 'http://192.168.1.71:5000/api';
+const API_URL = 'http://192.168.10.6:5000/api';
 const { width } = Dimensions.get('window');
 
 const DashboardScreen = ({ navigation }) => {

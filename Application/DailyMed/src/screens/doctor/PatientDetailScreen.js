@@ -13,7 +13,7 @@ import { Ionicons } from '@expo/vector-icons';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const API_URL = 'http://192.168.100.6:5000/api';
+const API_URL = 'http://192.168.10.6:5000/api';
 const { width } = Dimensions.get('window');
 
 const PatientDetailScreen = ({ route, navigation }) => {
